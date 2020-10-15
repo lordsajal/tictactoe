@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-8 offset-md-2">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="registrationForm" class="mx-auto">
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder="example@mail.com" formControlName="email" />
+            </div>
+
+            <div class="input-group">
+              <input
+         [type]="fieldTextType ? 'text' : 'password'"
+         class="form-control"
+         formControlName="password"
+       />
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa" [ngClass]="{
+          'fa-eye-slash': !fieldTextType,
+          'fa-eye': fieldTextType
+        }" (click)="toggleFieldTextType()"></i>
+                </span>
+              </div>
+            </div>
+            <button class="btn-primary btn btn-block" [disabled]="!registrationForm.valid">
+              Register
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
