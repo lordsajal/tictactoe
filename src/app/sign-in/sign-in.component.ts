@@ -18,8 +18,7 @@ export class SignInComponent implements OnInit {
   initRegForm() {
     this.registrationForm = this.fb.group({
       email: ["", [Validators.required, Validators.email]],
-      password: ["", Validators.required],
-      confirmpassword: ["", Validators.required]
+      password: ["", Validators.required]
     });
   }
 
