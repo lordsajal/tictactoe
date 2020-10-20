@@ -4,7 +4,7 @@
     <div class="col-12 col-md-8 offset-md-2">
       <div class="card">
         <div class="card-body">
-          <form [formGroup]="registrationForm" class="mx-auto">
+          <form [formGroup]= "registrationForm" (ngSubmit)= "onRegister(registrationForm)" class="mx-auto">
 
             <div class="input-group">
               <div class="input-group-prepend">
@@ -12,26 +12,19 @@
                   <i class="fa fa-envelope" aria-hidden="true"></i>
                 </span>
               </div>
-              <input type="text" class="form-control" placeholder="example@mail.com" formControlName="email" />
+              <input type="email" class="form-control" placeholder="Enter email id" formControlName="email">
             </div>
-
             <div class="input-group">
-              <input
-         [type]="fieldTextType ? 'text' : 'password'"
-         class="form-control"
-         formControlName="password"
-       />
+              <input [type]="fieldTextType ? 'text' : 'password'" class="form-control" placeholder="Enter password"
+                formControlName="password">
               <div class="input-group-append">
                 <span class="input-group-text">
-                  <i class="fa" [ngClass]="{
-          'fa-eye-slash': !fieldTextType,
-          'fa-eye': fieldTextType
-        }" (click)="toggleFieldTextType()"></i>
+                  <i class="fa" [ngClass]="{'fa-eye-slash': !fieldTextType, 'fa-eye': fieldTextType}" (click)="toggleFieldTextType()"></i>
                 </span>
               </div>
             </div>
-            <button class="btn-primary btn btn-block" [disabled]="!registrationForm.valid">
-              Register
+            <button class="btn-primary btn btn-block" [disabled]="!registrationForm.valid" >
+              SignIn
             </button>
           </form>
         </div>
