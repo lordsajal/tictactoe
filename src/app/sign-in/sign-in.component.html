@@ -4,7 +4,7 @@
     <div class="col-12 col-md-8 offset-md-2">
       <div class="card">
         <div class="card-body">
-          <form [formGroup]="registrationForm" class="mx-auto">
+          <form [formGroup]= "registrationForm" (ngSubmit)= "onRegister(registrationForm)" class="mx-auto">
 
             <div class="input-group">
               <div class="input-group-prepend">
@@ -23,7 +23,7 @@
                 </span>
               </div>
             </div>
-            <button class="btn-primary btn btn-block" [disabled]="!registrationForm.valid">
+            <button class="btn-primary btn btn-block" [disabled]="!registrationForm.valid" >
               SignIn
             </button>
           </form>

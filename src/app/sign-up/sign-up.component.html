@@ -1,66 +1,73 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <div class="container">
-    <div class="row">
-        <div class="col-12 col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-body">
-                    <form [formGroup]="registrationForm" class="mx-auto">
+  <div class="row">
+    <div class="col-12 col-md-8 offset-md-2">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]= "registrationForm" (ngSubmit)= "onRegister(registrationForm)" class="mx-auto">
 
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="First Name" formControlName="fName">
-                            <input type="text" class="form-control" placeholder="Last Name" formControlName="lName">
-                        </div>
-                        <div class="alert alert-danger"
-                        *ngIf="(!registrationForm.controls['fName'].valid || 
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="First Name" formControlName="fName">
+              <input type="text" class="form-control" placeholder="Last Name" formControlName="lName">
+            </div>
+            <div class="alert alert-danger" *ngIf="(!registrationForm.controls['fName'].valid ||
                         !registrationForm.controls['lName'].valid) &&
                         (registrationForm.controls['fName'].touched ||
                         registrationForm.controls['lName'].touched)">
-                          First name and last name are required!  
-                        </div>
-                        <div class="input-group">
-                            <input type="email" class="form-control" placeholder="Your email id"
-                                formControlName="email">
-                            </div>
-                                <small class="form-text text-muted">
-                                    We'll never share your email with anyone else
-                                </small>
-                                <div class="alert alert-danger" *ngIf="!registrationForm.controls['email'].valid &&
-                                registrationForm.controls['email'].touched">
-                                 A valid email is required!  
-                               </div>
-
-                        <div class="input-group">
-                            <input [type]="fieldTextTypeP ? 'text' : 'password'" class="form-control" placeholder="Create Password"
-                                formControlName="password">
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                    <i class="fa" [ngClass]="{'fa-eye-slash': !fieldTextTypeP, 'fa-eye': fieldTextTypeP}"
-                                        (click)="toggleFieldTextTypeP()"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="alert alert-danger" *ngIf="!registrationForm.controls['password'].valid &&
-                        registrationForm.controls['password'].touched">
-                        Password should be atleast 8 characters long!  
-                      </div>
-                        <div class="input-group">
-                            <input [type]="fieldTextTypeCP ? 'text' : 'password'" class="form-control" placeholder="Confrim Password"
-                                formControlName="confirmPassword">
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                    <i class="fa" [ngClass]="{'fa-eye-slash': !fieldTextTypeCP, 'fa-eye': fieldTextTypeCP}"
-                                        (click)="toggleFieldTextTypeCP()"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <button class="btn-primary btn btn-block" [disabled]="!registrationForm.valid">
-                                Register
-                            </button>
-                        </div>
-                    </form>
-                </div>
+              First name and last name are required!
             </div>
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Your email id" formControlName="email">
+            </div>
+            <small class="form-text text-muted">
+              We'll never share your email with anyone else
+            </small>
+            <div class="alert alert-danger" *ngIf="!registrationForm.controls['email'].valid &&
+                                registrationForm.controls['email'].touched">
+              A valid email is required!
+            </div>
+
+            <div class="input-group">
+              <input [type]="fieldTextTypeP ? 'text' : 'password'" class="form-control" placeholder="Create Password"
+                formControlName="password">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa" [ngClass]="{'fa-eye-slash': !fieldTextTypeP, 'fa-eye': fieldTextTypeP}"
+                    (click)="toggleFieldTextTypeP()"></i>
+                </span>
+              </div>
+            </div>
+            <div class="alert alert-danger" *ngIf="!registrationForm.controls['password'].valid &&
+                        registrationForm.controls['password'].touched">
+              Password should be atleast 8 characters long!
+            </div>
+            <div class="input-group">
+              <input [type]="fieldTextTypeCP ? 'text' : 'password'" class="form-control" placeholder="Confrim Password"
+                formControlName="confirmPassword">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa" [ngClass]="{'fa-eye-slash': !fieldTextTypeCP, 'fa-eye': fieldTextTypeCP}"
+                    (click)="toggleFieldTextTypeCP()"></i>
+                </span>
+              </div>
+            </div>
+            <div class="input-group">
+              <button class="btn-primary btn btn-block" [disabled]="!registrationForm.valid" >
+                Register
+              </button>
+            </div>
+          </form>
         </div>
+        <div class="alert alert-success" *ngIf="message.length > 0">
+          {{ message }}
+          </div>
+
+
+          <div class="alert alert-danger" *ngIf= "userError">
+      {{ userError.message }}
+      </div>
+      </div>
+
     </div>
+  </div>
 </div>
