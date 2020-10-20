@@ -1,6 +1,9 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -8,8 +11,9 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 })
 export class SignUpComponent implements OnInit {
   registrationForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
-
+  constructor(private fb: FormBuilder,public router:Router, public authService:AuthService) { }
+message : string="";
+userError:any;
   ngOnInit(): void {
     this.initRegForm();
   }
@@ -49,5 +53,37 @@ toggleFieldTextTypeP() {
 }
 toggleFieldTextTypeCP() {
   this.fieldTextTypeCP = !this.fieldTextTypeCP;
+}
+onRegister(registrationForm){
+console.log(registrationForm.value);
+let email: string = registrationForm.value.email;
+let password: string = registrationForm.value.password;
+let firstName: string = registrationForm.value.fName;
+let lastName: string = registrationForm.value.lName;
+
+
+this.authService.signup(email, password, firstName, lastName).then((user: any) => {
+
+  firebase.firestore().collection("users").doc(user.uid).set({
+    firstName: registrationForm.value.fName,
+    lastName: registrationForm.value.lName,
+    email: registrationForm.value.email,
+    photoURL: user.photoURL,
+
+  }).then(() => {
+    this.message = "You have been signed up successfully.";
+    this.userError = null;
+    this.router.navigate(['/profile']);
+  })
+
+
+}).catch((error) => {
+  console.log(error);
+  this.userError = error;
+})
+
+
+
+
 }
 }
