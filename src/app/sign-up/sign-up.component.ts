@@ -40,7 +40,7 @@ userError:any;
        return;
      }
      else{
-       confirmPassword.setErrors({
+        confirmPassword.setErrors({
          notEqualToPassword: true
        })
      }
@@ -73,7 +73,7 @@ this.authService.signup(email, password, firstName, lastName).then((user: any) =
   }).then(() => {
     this.message = "You have been signed up successfully.";
     this.userError = null;
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/signIn']);
   })
 
 

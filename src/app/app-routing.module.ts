@@ -7,7 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [{
-  path:'', redirectTo:'signIn',pathMatch:'full'
+  path:'', redirectTo:'signUp',pathMatch:'full'
 },{
   path:'signIn',component:SignInComponent
 },{
@@ -17,7 +17,7 @@ const routes: Routes = [{
 },{
   path:'game',component:GameComponent
 },{
-  path:'**', redirectTo:'signIn'
+  path:'**', redirectTo:'signUp'
 }];
 
 @NgModule({
