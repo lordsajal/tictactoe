@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { GameComponent } from './game/game.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -7,7 +8,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [{
-  path:'', redirectTo:'signIn',pathMatch:'full'
+  path:'', redirectTo:'signUp',pathMatch:'full'
 },{
   path:'signIn',component:SignInComponent
 },{
@@ -15,9 +16,9 @@ const routes: Routes = [{
 },{
   path:'profile',component:ProfileComponent
 },{
-  path:'game',component:GameComponent
+  path:'game',component:GameComponent,canActivate:  [AuthGuard]
 },{
-  path:'**', redirectTo:'signIn'
+  path:'**', redirectTo:'signUp'
 }];
 
 @NgModule({

@@ -1,119 +1,132 @@
+import { TmplAstReference } from '@angular/compiler';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
+import { MinLengthValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css']
+  styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit {
-
-user: boolean = true;
+  user: boolean = true;
   click: boolean = false;
-  arr1 : number[]= [0,0,0,0,0,0,0,0,0];
-
-  constructor() { }
+  fl: number = 0;
+  min: number;
+  max: number;
+  exists = [];
+  randomNUm: number = 2;
+  uChs: string;
+  bChs: string;
+  winner: string;
+  arr1 = [];
+  arr2 = [];
+  TP1 = [1, 2, 3];
+  TP2 = [1, 4, 7];
+  TP3 = [1, 5, 9];
+  TP4 = [2, 5, 8];
+  TP5 = [3, 6, 9];
+  TP6 = [3, 5, 7];
+  TP7 = [4, 5, 6];
+  TP8 = [7, 8, 9];
+  constructor() {}
 
   ngOnInit(): void {
+    document.getElementById('gm').style.display = 'none';
+    document.getElementById('wnr').style.display = 'none';
   }
-  btnClick1(event: MouseEvent) {
-    (event.target as HTMLButtonElement).disabled = true;
-    if(this.user){
-    (event.target as HTMLButtonElement).textContent = "O";
+  btnChO() {
+    document.getElementById('ch').style.display = 'none';
+    document.getElementById('gm').style.display = 'block';
+    this.uChs = 'O';
+    this.bChs = 'X';
+  }
+  btnChX() {
+    document.getElementById('ch').style.display = 'none';
+    document.getElementById('gm').style.display = 'block';
+    this.uChs = 'X';
+    this.bChs = 'O';
+  }
+  btnClick(btNo) {
+    document.getElementById('btn-' + btNo).setAttribute('disabled', 'disabled');
+    if (this.user) {
+      document.getElementById('btn-' + btNo).innerText = this.uChs;
+      this.arr1.push(btNo);
+    } else {
+      document.getElementById('btn-' + btNo).innerText = this.bChs;
+
+      this.arr2.push(btNo);
     }
-    else{
-      (event.target as HTMLButtonElement).textContent = "X";
-    };
-    this.arr1[0]=1;
-    this.user=!this.user;
-  };
-  btnClick2(event: MouseEvent) {
-    (event.target as HTMLButtonElement).disabled = true;
-    if(this.user){
-      (event.target as HTMLButtonElement).textContent = "O";
+    this.exists[btNo] = true;
+    this.user = !this.user;
+    this.fl++;
+    this.check();
+    if (!this.user) {
+      this.getRandomNum();
+    }
+  }
+
+  check() {
+    if (this.fl == 9) {
+      this.winner = 'MATCH DRAW';
+      this.gFnsh();
+    }
+    if (
+      this.matching(this.TP1, this.arr1) ||
+      this.matching(this.TP2, this.arr1) ||
+      this.matching(this.TP3, this.arr1) ||
+      this.matching(this.TP4, this.arr1) ||
+      this.matching(this.TP5, this.arr1) ||
+      this.matching(this.TP6, this.arr1) ||
+      this.matching(this.TP7, this.arr1) ||
+      this.matching(this.TP8, this.arr1)
+    ) {
+      this.winner = 'THE WINNER IS USER';
+      this.gFnsh();
+    }
+    if (
+      this.matching(this.TP1, this.arr2) ||
+      this.matching(this.TP2, this.arr2) ||
+      this.matching(this.TP3, this.arr2) ||
+      this.matching(this.TP4, this.arr2) ||
+      this.matching(this.TP5, this.arr2) ||
+      this.matching(this.TP6, this.arr2) ||
+      this.matching(this.TP7, this.arr2) ||
+      this.matching(this.TP8, this.arr2)
+    ) {
+      this.winner = 'THE WINNER IS BOT';
+      this.gFnsh();
+    }
+  }
+  gFnsh() {
+    document.getElementById('wnr').style.display = 'block';
+    var x = document.getElementsByClassName('btn-play');
+    var i: number;
+    for (i = 0; i < x.length; i++) {
+      (<HTMLInputElement>x[i]).setAttribute('disabled', 'disabled');
+    }
+  }
+  getRandomNum() {
+    let max = 9;
+    let min = 1;
+    if (this.fl != 9) {
+      do {
+        this.randomNUm = Math.floor(Math.random() * (max - min + 1)) + min;
+      } while (this.exists[this.randomNUm]);
+    }
+    document.getElementById('btn-' + this.randomNUm).click();
+  }
+  matching(arr, check) {
+    let f = 0;
+    for (let i = 0; i < 3; i++) {
+      if (check.includes(arr[i])) {
+        f++;
       }
-      else{
-        (event.target as HTMLButtonElement).textContent = "X";
-      };
-      this.arr1[1]=1;
-      this.user=!this.user;
-  };
-  btnClick3(event: MouseEvent) {
-    (event.target as HTMLButtonElement).disabled = true;
-    if(this.user){
-      (event.target as HTMLButtonElement).textContent = "O";
-      }
-      else{
-        (event.target as HTMLButtonElement).textContent = "X";
-      };
-      this.arr1[2]=1;
-      this.user=!this.user;
-  };
-  
-  btnClick4(event: MouseEvent) {
-    (event.target as HTMLButtonElement).disabled = true;
-    if(this.user){
-      (event.target as HTMLButtonElement).textContent = "O";
-      }
-      else{
-        (event.target as HTMLButtonElement).textContent = "X";
-      };
-      this.arr1[3]=1;
-      this.user=!this.user;
-  };
-  btnClick5(event: MouseEvent) {
-    (event.target as HTMLButtonElement).disabled = true;
-    if(this.user){
-      (event.target as HTMLButtonElement).textContent = "O";
-      }
-      else{
-        (event.target as HTMLButtonElement).textContent = "X";
-      };
-      this.arr1[4]=1;
-      this.user=!this.user;
-  };
-  btnClick6(event: MouseEvent) {
-    (event.target as HTMLButtonElement).disabled = true;
-    if(this.user){
-      (event.target as HTMLButtonElement).textContent = "O";
-      }
-      else{
-        (event.target as HTMLButtonElement).textContent = "X";
-      };
-      this.arr1[5]=1;
-      this.user=!this.user;
-  };
-  btnClick7(event: MouseEvent) {
-    (event.target as HTMLButtonElement).disabled = true;
-    if(this.user){
-      (event.target as HTMLButtonElement).textContent = "O";
-      }
-      else{
-        (event.target as HTMLButtonElement).textContent = "X";
-      };
-      this.arr1[6]=1;
-      this.user=!this.user;
-  };
-  btnClick8(event: MouseEvent) {
-    (event.target as HTMLButtonElement).disabled = true;
-    if(this.user){
-      (event.target as HTMLButtonElement).textContent = "O";
-      }
-      else{
-        (event.target as HTMLButtonElement).textContent = "X";
-      };
-      this.arr1[7]=1;
-      this.user=!this.user;
-  };
-  btnClick9(event: MouseEvent) {
-    (event.target as HTMLButtonElement).disabled = true;
-    if(this.user){
-      (event.target as HTMLButtonElement).textContent = "O";
-      }
-      else{
-        (event.target as HTMLButtonElement).textContent = "X";
-      };
-      this.arr1[8]=1;
-      this.user=!this.user;
-  };
+    }
+    if (f == 3) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

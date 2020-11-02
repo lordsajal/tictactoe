@@ -1,8 +1,23 @@
 .btn-play{
-    border-radius: 50px;
-    width: 150px;
-    height: 150px;
+
+    width: 100px;
+    height: 100px;
+
 }
-.form-row{
-    margin-top: 10px;
+table, tr, td {
+  border: none;
+}
+
+.container{
+  max-width: 500px;
+margin: auto;
+}
+
+#para{
+  margin: auto;
+  font-size:large;
+  font-weight: 10px;
+  font: bolder;
+  color:blue;
+  text-align: center;
 }

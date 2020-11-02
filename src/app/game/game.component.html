@@ -1,33 +1,40 @@
-<div class="form-row">
-    <div class="form-group col-12 offset-md-2 col-md-2">
-        <button class="btn btn-success btn-play" (click)="btnClick1($event)"></button>
-    </div>
-    <div class="form-group col-12 col-md-2">
-        <button class="btn btn-success btn-play" (click)="btnClick2($event)"></button>
-    </div>
-    <div class="form-group col-12 col-md-2">
-        <button class="btn btn-success btn-play" (click)="btnClick3($event)"></button>
-    </div>
+
+
+<div class="container col-sm-6" id="gm">
+<table class="table" >
+
+  <tbody>
+    <tr >
+      <td> <button class="btn btn-success btn-play" id="btn-1" (click)="btnClick(1)"></button></td>
+      <td> <button class="btn btn-success btn-play" id="btn-2" (click)="btnClick(2)"></button></td>
+      <td> <button class="btn btn-success btn-play" id="btn-3" (click)="btnClick(3)"></button></td>
+    </tr>
+    <tr >
+      <td> <button class="btn btn-success btn-play" id="btn-4" (click)="btnClick(4)"></button></td>
+      <td> <button class="btn btn-success btn-play" id="btn-5" (click)="btnClick(5)"></button></td>
+      <td> <button class="btn btn-success btn-play" id="btn-6" (click)="btnClick(6)"></button></td>
+    </tr>
+    <tr>
+      <td> <button class="btn btn-success btn-play" id="btn-7" (click)="btnClick(7)"></button></td>
+      <td> <button class="btn btn-success btn-play" id="btn-8" (click)="btnClick(8)"></button></td>
+      <td> <button class="btn btn-success btn-play" id="btn-9" (click)="btnClick(9)"></button></td>
+    </tr>
+  </tbody>
+</table>
+
+
 </div>
-<div class="form-row">
-    <div class="form-group col-12 offset-md-2 col-md-2">
-        <button class="btn btn-success btn-play" (click)="btnClick4($event)"></button>
-    </div>
-    <div class="form-group col-12 col-md-2">
-        <button class="btn btn-success btn-play" (click)="btnClick5($event)"></button>
-    </div>
-    <div class="form-group col-12 col-md-2">
-        <button class="btn btn-success btn-play" (click)="btnClick6($event)"></button>
-    </div>
+
+
+
+
+
+
+<div class="container" id="ch">
+    <p> CHOOSE X OR O</p>
+    <button class="btn btn-warning mr-3" (click)="btnChO()">O</button>
+    <button class="btn btn-warning" (click)="btnChX()">X</button>
 </div>
-<div class="form-row">
-    <div class="form-group col-12 offset-md-2 col-md-2">
-        <button class="btn btn-success btn-play" (click)="btnClick7($event)"></button>
-    </div>
-    <div class="form-group col-12 col-md-2">
-        <button class="btn btn-success btn-play" (click)="btnClick8($event)"></button>
-    </div>
-    <div class="form-group col-12 col-md-2">
-        <button class="btn btn-success btn-play" (click)="btnClick9($event)"></button>
-    </div>
+<div class="container" id="wnr">
+  <p id="para"> {{ winner }}</p>
 </div>

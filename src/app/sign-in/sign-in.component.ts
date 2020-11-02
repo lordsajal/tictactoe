@@ -11,7 +11,7 @@ export class SignInComponent implements OnInit {
 
   registrationForm: FormGroup;
 
-  constructor(private fb: FormBuilder, public router:Router,public authService:AuthService) {}
+  constructor(private fb: FormBuilder, public router:Router, public authService:AuthService) {}
   message : string="";
   userError:any;
   ngOnInit() {
